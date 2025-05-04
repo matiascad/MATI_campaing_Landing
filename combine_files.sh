@@ -70,6 +70,7 @@ fi
 # Array of files to extract
 files=(
 
+.turbo
 apps/matiautomatic-landing/src/components/Countdown.tsx
 apps/matiautomatic-landing/src/components/Hero.tsx
 apps/matiautomatic-landing/src/components/MatiLogo.tsx
@@ -82,9 +83,12 @@ apps/matiautomatic-landing/.env
 apps/matiautomatic-landing/index.html
 apps/matiautomatic-landing/package.json
 apps/matiautomatic-landing/postcss.config.js
+apps/matiautomatic-landing/project.json
 apps/matiautomatic-landing/tailwind.config.js
+apps/matiautomatic-landing/tsconfig.json
+apps/matiautomatic-landing/tsconfig.node.json
 apps/matiautomatic-landing/vite.config.ts
-apps/smartbuildlab-landing/node_modules
+apps/smartbuildlab-landing/src
 apps/smartbuildlab-landing/src/components/Countdown.tsx
 apps/smartbuildlab-landing/src/components/FeaturePrinciples.tsx
 apps/smartbuildlab-landing/src/components/Hero.tsx
@@ -99,12 +103,18 @@ apps/smartbuildlab-landing/.env
 apps/smartbuildlab-landing/index.html
 apps/smartbuildlab-landing/package.json
 apps/smartbuildlab-landing/postcss.config.js
+apps/smartbuildlab-landing/project.json
 apps/smartbuildlab-landing/tailwind.config.js
+apps/smartbuildlab-landing/tsconfig.json
+apps/smartbuildlab-landing/tsconfig.node.json
 apps/smartbuildlab-landing/vite.config.ts
+.gitignore
+.npmrc
+nx.json
 package.json
 README.md
+tsconfig.base.json
 tsconfig.json
-turbo.json
 
 )
 

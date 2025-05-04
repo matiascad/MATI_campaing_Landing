@@ -1,3 +1,10 @@
+# Directory: /workspaces/MATI_campaing_Landing/.turbo
+#------------------------------------------------
+# Contents:
+  Directory: cookies/
+  Directory: daemon/
+
+
 # apps/matiautomatic-landing/src/components/Countdown.tsx
 #------------------------------------------------
 import React, { useState, useEffect } from 'react';
@@ -735,36 +742,36 @@ VITE_MATIAUTOMATIC_LIST_ID=your_list_id_here
 # apps/matiautomatic-landing/package.json
 #------------------------------------------------
 {
-    "name": "matiautomatic-landing",
-    "private": true,
-    "version": "0.0.0",
-    "type": "module",
-    "scripts": {
-      "dev": "vite",
-      "build": "tsc && vite build",
-      "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-      "preview": "vite preview"
-    },
-    "dependencies": {
-      "react": "^18.2.0",
-      "react-dom": "^18.2.0"
-    },
-    "devDependencies": {
-      "@types/react": "^18.2.15",
-      "@types/react-dom": "^18.2.7",
-      "@typescript-eslint/eslint-plugin": "^6.0.0",
-      "@typescript-eslint/parser": "^6.0.0",
-      "@vitejs/plugin-react": "^4.0.3",
-      "autoprefixer": "^10.4.14",
-      "eslint": "^8.45.0",
-      "eslint-plugin-react-hooks": "^4.6.0",
-      "eslint-plugin-react-refresh": "^0.4.3",
-      "postcss": "^8.4.27",
-      "tailwindcss": "^3.3.3",
-      "typescript": "^5.0.2",
-      "vite": "^4.4.5"
-    }
+  "name": "matiautomatic-landing",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "npx nx run matiautomatic-landing:dev",
+    "build": "npx nx run matiautomatic-landing:build",
+    "lint": "npx nx run matiautomatic-landing:lint",
+    "preview": "npx nx run matiautomatic-landing:preview"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.15",
+    "@types/react-dom": "^18.2.7",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "@vitejs/plugin-react": "^4.0.3",
+    "autoprefixer": "^10.4.14",
+    "eslint": "^8.45.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.3",
+    "postcss": "^8.4.27",
+    "tailwindcss": "^3.3.3",
+    "typescript": "^5.0.2",
+    "vite": "^4.4.5"
   }
+}
 
 
 # apps/matiautomatic-landing/postcss.config.js
@@ -777,52 +784,154 @@ export default {
   }
 
 
+# apps/matiautomatic-landing/project.json
+#------------------------------------------------
+{
+    "name": "matiautomatic-landing",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "apps/matiautomatic-landing/src",
+    "projectType": "application",
+    "targets": {
+      "build": {
+        "executor": "@nx/vite:build",
+        "outputs": ["{options.outputPath}"],
+        "options": {
+          "outputPath": "dist/apps/matiautomatic-landing"
+        }
+      },
+      "dev": {
+        "executor": "@nx/vite:dev-server",
+        "options": {
+          "buildTarget": "matiautomatic-landing:build",
+          "port": 4200
+        }
+      },
+      "serve": {
+        "executor": "@nx/vite:dev-server",
+        "options": {
+          "buildTarget": "matiautomatic-landing:build",
+          "port": 4200
+        }
+      },
+      "lint": {
+        "executor": "@nx/eslint:lint"
+      }
+    },
+    "tags": []
+  }
+
+
 # apps/matiautomatic-landing/tailwind.config.js
 #------------------------------------------------
 /** @type {import('tailwindcss').Config} */
 export default {
-    content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
-    theme: {
-      extend: {
-        colors: {
-          darkBlue: '#031225',
-          blue: {
-            900: '#052444',
-            800: '#0f4c8a',
-            700: '#33a3bc',
-            200: '#b3d5ff'
-          },
-          pink: {
-            500: '#d946ef'
-          },
-          indigo: {
-            900: '#312e81'
-          }
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {
+      colors: {
+        darkBlue: '#031225',
+        blue: {
+          900: '#052444',
+          800: '#0f4c8a',
+          700: '#33a3bc',
+          200: '#b3d5ff'
         },
-        fontFamily: {
-          sans: ['Montserrat', 'sans-serif'],
+        pink: {
+          500: '#d946ef'
         },
+        indigo: {
+          900: '#312e81'
+        }
+      },
+      fontFamily: {
+        sans: ['Montserrat', 'sans-serif'],
       },
     },
-    plugins: [],
+  },
+  plugins: [],
+}
+
+
+# apps/matiautomatic-landing/tsconfig.json
+#------------------------------------------------
+{
+    "extends": "../../tsconfig.base.json",
+    "compilerOptions": {
+      "target": "ES2020",
+      "useDefineForClassFields": true,
+      "lib": ["ES2020", "DOM", "DOM.Iterable"],
+      "module": "ESNext",
+      "skipLibCheck": true,
+      "moduleResolution": "bundler",
+      "allowImportingTsExtensions": true,
+      "resolveJsonModule": true,
+      "isolatedModules": true,
+      "noEmit": true,
+      "jsx": "react-jsx",
+      "strict": true,
+      "noUnusedLocals": true,
+      "noUnusedParameters": true,
+      "noFallthroughCasesInSwitch": true
+    },
+    "include": ["src"],
+    "references": [{ "path": "./tsconfig.node.json" }]
+  }
+
+
+# apps/matiautomatic-landing/tsconfig.node.json
+#------------------------------------------------
+{
+    "compilerOptions": {
+      "composite": true,
+      "skipLibCheck": true,
+      "module": "ESNext",
+      "moduleResolution": "bundler",
+      "allowSyntheticDefaultImports": true
+    },
+    "include": ["vite.config.ts"]
   }
 
 
 # apps/matiautomatic-landing/vite.config.ts
 #------------------------------------------------
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
+import { join } from 'path';
 
-// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
-})
+  cacheDir: '../../node_modules/.vite/matiautomatic-landing',
+  
+  plugins: [
+    react(),
+    nxViteTsPaths()
+  ],
+
+  server: {
+    port: 4200,
+    host: 'localhost',
+  },
+
+  build: {
+    outDir: '../../dist/apps/matiautomatic-landing',
+    reportCompressedSize: true,
+    commonjsOptions: {
+      transformMixedEsModules: true,
+    },
+  }
+});
 
 
-# Directory: /workspaces/MATI_campaing_Landing/apps/smartbuildlab-landing/node_modules
+# Directory: /workspaces/MATI_campaing_Landing/apps/smartbuildlab-landing/src
 #------------------------------------------------
 # Contents:
-  Directory: .vite/
+  Directory: components/
+  Directory: styles/
+  File: App.tsx
+  File: main.tsx
 
 
 # apps/smartbuildlab-landing/src/components/Countdown.tsx
@@ -1824,36 +1933,36 @@ VITE_SMARTBUILDLAB_LIST_ID=your_list_id_here
 # apps/smartbuildlab-landing/package.json
 #------------------------------------------------
 {
-    "name": "smartbuildlab-landing",
-    "private": true,
-    "version": "0.0.0",
-    "type": "module",
-    "scripts": {
-      "dev": "vite",
-      "build": "tsc && vite build",
-      "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-      "preview": "vite preview"
-    },
-    "dependencies": {
-      "react": "^18.2.0",
-      "react-dom": "^18.2.0"
-    },
-    "devDependencies": {
-      "@types/react": "^18.2.15",
-      "@types/react-dom": "^18.2.7",
-      "@typescript-eslint/eslint-plugin": "^6.0.0",
-      "@typescript-eslint/parser": "^6.0.0",
-      "@vitejs/plugin-react": "^4.0.3",
-      "autoprefixer": "^10.4.14",
-      "eslint": "^8.45.0",
-      "eslint-plugin-react-hooks": "^4.6.0",
-      "eslint-plugin-react-refresh": "^0.4.3",
-      "postcss": "^8.4.27",
-      "tailwindcss": "^3.3.3",
-      "typescript": "^5.0.2",
-      "vite": "^4.4.5"
-    }
+  "name": "smartbuildlab-landing",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "npx nx run smartbuildlab-landing:dev",
+    "build": "npx nx run smartbuildlab-landing:build",
+    "lint": "npx nx run smartbuildlab-landing:lint",
+    "preview": "npx nx run smartbuildlab-landing:preview"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.15",
+    "@types/react-dom": "^18.2.7",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "@vitejs/plugin-react": "^4.0.3",
+    "autoprefixer": "^10.4.14",
+    "eslint": "^8.45.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.3",
+    "postcss": "^8.4.27",
+    "tailwindcss": "^3.3.3",
+    "typescript": "^5.0.2",
+    "vite": "^4.4.5"
   }
+}
 
 
 # apps/smartbuildlab-landing/postcss.config.js
@@ -1866,75 +1975,296 @@ export default {
   }
 
 
+# apps/smartbuildlab-landing/project.json
+#------------------------------------------------
+{
+    "name": "smartbuildlab-landing",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "apps/smartbuildlab-landing/src",
+    "projectType": "application",
+    "targets": {
+      "build": {
+        "executor": "@nx/vite:build",
+        "outputs": ["{options.outputPath}"],
+        "options": {
+          "outputPath": "dist/apps/smartbuildlab-landing"
+        }
+      },
+      "dev": {
+        "executor": "@nx/vite:dev-server",
+        "options": {
+          "buildTarget": "smartbuildlab-landing:build",
+          "port": 4201
+        }
+      },
+      "serve": {
+        "executor": "@nx/vite:dev-server",
+        "options": {
+          "buildTarget": "smartbuildlab-landing:build",
+          "port": 4201
+        }
+      },
+      "lint": {
+        "executor": "@nx/eslint:lint"
+      }
+    },
+    "tags": []
+  }
+
+
 # apps/smartbuildlab-landing/tailwind.config.js
 #------------------------------------------------
 /** @type {import('tailwindcss').Config} */
 export default {
-    content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
-    theme: {
-      extend: {
-        colors: {
-          deepPurple: '#160b38',
-          purple: {
-            400: '#c084fc',
-            300: '#d8b4fe',
-            200: '#e9d5ff'
-          },
-          blue: {
-            400: '#60a5fa'
-          },
-          orange: {
-            400: '#fb923c'
-          }
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {
+      colors: {
+        deepPurple: '#160b38',
+        purple: {
+          400: '#c084fc',
+          300: '#d8b4fe',
+          200: '#e9d5ff'
         },
-        fontFamily: {
-          sans: ['Montserrat', 'sans-serif'],
+        blue: {
+          400: '#60a5fa'
         },
+        orange: {
+          400: '#fb923c'
+        }
+      },
+      fontFamily: {
+        sans: ['Montserrat', 'sans-serif'],
       },
     },
-    plugins: [],
+  },
+  plugins: [],
+}
+
+
+# apps/smartbuildlab-landing/tsconfig.json
+#------------------------------------------------
+{
+    "extends": "../../tsconfig.base.json",
+    "compilerOptions": {
+      "target": "ES2020",
+      "useDefineForClassFields": true,
+      "lib": ["ES2020", "DOM", "DOM.Iterable"],
+      "module": "ESNext",
+      "skipLibCheck": true,
+      "moduleResolution": "bundler",
+      "allowImportingTsExtensions": true,
+      "resolveJsonModule": true,
+      "isolatedModules": true,
+      "noEmit": true,
+      "jsx": "react-jsx",
+      "strict": true,
+      "noUnusedLocals": true,
+      "noUnusedParameters": true,
+      "noFallthroughCasesInSwitch": true
+    },
+    "include": ["src"],
+    "references": [{ "path": "./tsconfig.node.json" }]
+  }
+
+
+# apps/smartbuildlab-landing/tsconfig.node.json
+#------------------------------------------------
+{
+    "compilerOptions": {
+      "composite": true,
+      "skipLibCheck": true,
+      "module": "ESNext",
+      "moduleResolution": "bundler",
+      "allowSyntheticDefaultImports": true
+    },
+    "include": ["vite.config.ts"]
   }
 
 
 # apps/smartbuildlab-landing/vite.config.ts
 #------------------------------------------------
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
+import { join } from 'path';
 
-// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
-})
+  cacheDir: '../../node_modules/.vite/smartbuildlab-landing',
+  
+  plugins: [
+    react(),
+    nxViteTsPaths()
+  ],
+
+  server: {
+    port: 4201,
+    host: 'localhost',
+  },
+
+  build: {
+    outDir: '../../dist/apps/smartbuildlab-landing',
+    reportCompressedSize: true,
+    commonjsOptions: {
+      transformMixedEsModules: true,
+    },
+  }
+});
+
+
+# .gitignore
+#------------------------------------------------
+# dependencies
+node_modules
+.pnp
+.pnp.js
+
+# testing
+coverage
+
+# nx
+.nx/
+dist
+tmp
+
+# production
+build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# env files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# turbo
+.turbo
+
+# Add these to your .gitignore
+.nx/
+dist/
+
+
+# .npmrc
+#------------------------------------------------
+legacy-peer-deps=true
+
+
+# nx.json
+#------------------------------------------------
+{
+    "extends": "nx/presets/npm.json",
+    "affected": {
+      "defaultBase": "main"
+    },
+    "tasksRunnerOptions": {
+      "default": {
+        "runner": "nx/tasks-runners/default",
+        "options": {
+          "cacheableOperations": ["build", "lint"]
+        }
+      }
+    },
+    "targetDefaults": {
+      "build": {
+        "dependsOn": ["^build"]
+      }
+    },
+    "generators": {
+      "@nx/react": {
+        "application": {
+          "style": "css",
+          "linter": "eslint",
+          "bundler": "vite"
+        }
+      }
+    }
+  }
 
 
 # package.json
 #------------------------------------------------
 {
-    "name": "mati-monorepo",
-    "version": "1.0.0",
-    "private": true,
-    "workspaces": [
-      "apps/*"
-    ],
-    "scripts": {
-      "build": "turbo run build",
-      "dev": "turbo run dev",
-      "lint": "turbo run lint",
-      "dev:mati": "npm run dev --workspace=matiautomatic-landing",
-      "dev:smart": "npm run dev --workspace=smartbuildlab-landing",
-      "build:mati": "npm run build --workspace=matiautomatic-landing",
-      "build:smart": "npm run build --workspace=smartbuildlab-landing"
-    },
-    "devDependencies": {
-      "turbo": "^1.10.0",
-      "typescript": "^5.0.4"
-    }
+  "name": "mati-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "nx": "nx",
+    "build": "nx run-many --target=build --all",
+    "dev": "nx run-many --target=dev --all",
+    "lint": "nx run-many --target=lint --all",
+    "dev:mati": "nx run matiautomatic-landing:dev",
+    "dev:smart": "nx run smartbuildlab-landing:dev",
+    "build:mati": "nx run matiautomatic-landing:build",
+    "build:smart": "nx run smartbuildlab-landing:build",
+    "graph": "nx graph"
+  },
+  "devDependencies": {
+    "@nx/react": "16.5.5",
+    "@nx/vite": "16.5.5",
+    "@nx/workspace": "16.5.5",
+    "@types/node": "^22.15.3",
+    "eslint": "^8.45.0",
+    "nx": "16.5.5",
+    "path": "^0.12.7",
+    "typescript": "^5.0.4",
+    "vite": "^4.4.5",
+    "vitest": "^3.1.2"
   }
+}
+
 
 
 # README.md
 #------------------------------------------------
 # MATI_campaing_Landing
+
+
+# tsconfig.base.json
+#------------------------------------------------
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2020",
+    "module": "esnext",
+    "lib": [
+      "es2020",
+      "dom"
+    ],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {}
+  },
+  "exclude": [
+    "node_modules",
+    "tmp"
+  ]
+}
+
 
 
 # tsconfig.json
@@ -1958,24 +2288,6 @@ export default defineConfig({
       "baseUrl": ".",
       "paths": {
         "@/*": ["*"]
-      }
-    }
-  }
-
-
-# turbo.json
-#------------------------------------------------
-{
-    "$schema": "https://turbo.build/schema.json",
-    "pipeline": {
-      "build": {
-        "dependsOn": ["^build"],
-        "outputs": ["dist/**", ".next/**", "!.next/cache/**"]
-      },
-      "lint": {},
-      "dev": {
-        "cache": false,
-        "persistent": true
       }
     }
   }

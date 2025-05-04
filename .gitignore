@@ -33,3 +33,8 @@ yarn-error.log*
 
 # turbo
 .turbo
+
+# Add these to your .gitignore
+.nx/
+dist/
+

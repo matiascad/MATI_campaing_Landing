@@ -1,21 +1,33 @@
 {
-    "name": "mati-monorepo",
-    "version": "1.0.0",
-    "private": true,
-    "workspaces": [
-      "apps/*"
-    ],
-    "scripts": {
-      "build": "turbo run build",
-      "dev": "turbo run dev",
-      "lint": "turbo run lint",
-      "dev:mati": "npm run dev --workspace=matiautomatic-landing",
-      "dev:smart": "npm run dev --workspace=smartbuildlab-landing",
-      "build:mati": "npm run build --workspace=matiautomatic-landing",
-      "build:smart": "npm run build --workspace=smartbuildlab-landing"
-    },
-    "devDependencies": {
-      "turbo": "^1.10.0",
-      "typescript": "^5.0.4"
-    }
+  "name": "mati-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "nx": "nx",
+    "build": "nx run-many --target=build --all",
+    "dev": "nx run-many --target=dev --all",
+    "lint": "nx run-many --target=lint --all",
+    "dev:mati": "nx run matiautomatic-landing:dev",
+    "dev:smart": "nx run smartbuildlab-landing:dev",
+    "build:mati": "nx run matiautomatic-landing:build",
+    "build:smart": "nx run smartbuildlab-landing:build",
+    "graph": "nx graph"
+  },
+  "devDependencies": {
+    "@nx/react": "16.5.5",
+    "@nx/vite": "16.5.5",
+    "@nx/workspace": "16.5.5",
+    "@types/node": "^22.15.3",
+    "autoprefixer": "^10.4.21",
+    "eslint": "^8.45.0",
+    "nx": "16.5.5",
+    "path": "^0.12.7",
+    "postcss": "^8.5.3",
+    "typescript": "^5.0.4",
+    "vite": "^4.4.5",
+    "vitest": "^3.1.2"
   }
+}

@@ -1,0 +1,33 @@
+{
+    "name": "matiautomatic-landing",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "apps/matiautomatic-landing/src",
+    "projectType": "application",
+    "targets": {
+      "build": {
+        "executor": "@nx/vite:build",
+        "outputs": ["{options.outputPath}"],
+        "options": {
+          "outputPath": "dist/apps/matiautomatic-landing"
+        }
+      },
+      "dev": {
+        "executor": "@nx/vite:dev-server",
+        "options": {
+          "buildTarget": "matiautomatic-landing:build",
+          "port": 4200
+        }
+      },
+      "serve": {
+        "executor": "@nx/vite:dev-server",
+        "options": {
+          "buildTarget": "matiautomatic-landing:build",
+          "port": 4200
+        }
+      },
+      "lint": {
+        "executor": "@nx/eslint:lint"
+      }
+    },
+    "tags": []
+  }
