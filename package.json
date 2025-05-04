@@ -1,0 +1,21 @@
+{
+    "name": "mati-monorepo",
+    "version": "1.0.0",
+    "private": true,
+    "workspaces": [
+      "apps/*"
+    ],
+    "scripts": {
+      "build": "turbo run build",
+      "dev": "turbo run dev",
+      "lint": "turbo run lint",
+      "dev:mati": "npm run dev --workspace=matiautomatic-landing",
+      "dev:smart": "npm run dev --workspace=smartbuildlab-landing",
+      "build:mati": "npm run build --workspace=matiautomatic-landing",
+      "build:smart": "npm run build --workspace=smartbuildlab-landing"
+    },
+    "devDependencies": {
+      "turbo": "^1.10.0",
+      "typescript": "^5.0.4"
+    }
+  }

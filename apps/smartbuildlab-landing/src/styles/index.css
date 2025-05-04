@@ -1,0 +1,151 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-blue: #1e3a8a;
+  --primary-purple: #7e22ce;
+  --primary-orange: #ea580c;
+  --background: #160b38;
+  --text-primary: #ffffff;
+  --text-secondary: #e9d8fd;
+  --card-bg: rgba(126, 34, 206, 0.1);
+  --card-border: rgba(234, 88, 12, 0.3);
+  --glow-color: rgba(234, 88, 12, 0.2);
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background-color: var(--background);
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+.bg-deepPurple {
+  background-color: #160b38;
+}
+
+.glass-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+  border-color: var(--primary-orange);
+}
+
+.principle-card {
+  position: relative;
+  overflow: hidden;
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.principle-card:hover {
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+}
+
+.form-container {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(234, 88, 12, 0.2);
+  border-radius: 12px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.mati-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.mati-card:hover {
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+  border-color: var(--primary-orange);
+}
+
+.mati-letter {
+  font-size: 2.5rem;
+  font-weight: 800;
+  background: linear-gradient(to right, var(--primary-purple), var(--primary-orange));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-right: 1rem;
+}
+
+.countdown-item {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(234, 88, 12, 0.2);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  min-width: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.countdown-item:hover {
+  transform: translateY(-3px);
+  border-color: var(--primary-orange);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.gradient-button {
+  background: linear-gradient(45deg, var(--primary-purple), var(--primary-orange));
+  border: none;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.gradient-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.social-icon {
+  transition: all 0.3s ease;
+  opacity: 0.8;
+}
+
+.social-icon:hover {
+  transform: translateY(-5px) scale(1.1);
+  opacity: 1;
+}
+
+input {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  transition: all 0.2s ease;
+}
+
+input:focus {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--primary-orange);
+  box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.3);
+  outline: none;
+  transform: translateY(-2px);
+}

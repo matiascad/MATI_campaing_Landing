@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #031225;
+  --text-primary: #ffffff;
+  --text-secondary: #b3d5ff;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background-color: var(--background);
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+.bg-darkBlue {
+  background-color: #031225;
+}
+
+/* For buttons with gradient hover effect */
+.gradient-button {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+
+.gradient-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+input {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  transition: all 0.2s ease;
+}
+
+input:focus {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #33a3bc;
+  box-shadow: 0 0 0 3px rgba(89, 230, 255, 0.2);
+  outline: none;
+  transform: translateY(-2px);
+}
