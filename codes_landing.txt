@@ -1,0 +1,1983 @@
+# apps/matiautomatic-landing/src/components/Countdown.tsx
+#------------------------------------------------
+import React, { useState, useEffect } from 'react';
+
+const Countdown: React.FC = () => {
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0
+  });
+  
+  const [isLaunched, setIsLaunched] = useState(false);
+
+  useEffect(() => {
+    const countDownDate = new Date("May 1, 2025 00:00:00").getTime();
+    
+    const updateCountdown = () => {
+      const now = new Date().getTime();
+      const distance = countDownDate - now;
+      
+      if (distance < 0) {
+        setIsLaunched(true);
+        return;
+      }
+      
+      setTimeLeft({
+        days: Math.floor(distance / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+        minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
+        seconds: Math.floor((distance % (1000 * 60)) / 1000)
+      });
+    };
+    
+    // Initial update
+    updateCountdown();
+    
+    // Update every second
+    const interval = setInterval(updateCountdown, 1000);
+    
+    return () => clearInterval(interval);
+  }, []);
+
+  const formatNumber = (num: number) => {
+    return num < 10 ? `0${num}` : num.toString();
+  };
+
+  return (
+    <div className="mt-6 text-center">
+      <h3 className="text-lg font-medium text-blue-300 mb-3">The 10 Principles of Physical AI (M.A.T.I.)</h3>
+      <p className="text-sm text-blue-200 mb-3">Campaign Starts on International Workers' Day</p>
+      
+      <div className="countdown-container" id="countdown">
+        {isLaunched ? (
+          <div className="countdown-item bg-gradient-to-r from-blue-600 to-cyan-400 text-white">
+            <span className="text-2xl font-bold">LAUNCHED!</span>
+          </div>
+        ) : (
+          <>
+            <div className="countdown-item tooltip">
+              <span className="text-2xl font-bold text-white">{formatNumber(timeLeft.days)}</span>
+              <span className="text-xs text-blue-300">Days</span>
+              <span className="tooltip-text">{timeLeft.days} day(s) until campaign launch!</span>
+            </div>
+            <div className="countdown-item tooltip">
+              <span className="text-2xl font-bold text-white">{formatNumber(timeLeft.hours)}</span>
+              <span className="text-xs text-blue-300">Hours</span>
+              <span className="tooltip-text">Hours remaining until campaign launch</span>
+            </div>
+            <div className="countdown-item tooltip">
+              <span className="text-2xl font-bold text-white">{formatNumber(timeLeft.minutes)}</span>
+              <span className="text-xs text-blue-300">Minutes</span>
+              <span className="tooltip-text">Minutes remaining until campaign launch</span>
+            </div>
+            <div className="countdown-item tooltip">
+              <span className="text-2xl font-bold text-white">{formatNumber(timeLeft.seconds)}</span>
+              <span className="text-xs text-blue-300">Seconds</span>
+              <span className="tooltip-text">Seconds remaining until campaign launch</span>
+            </div>
+          </>
+        )}
+      </div>
+      
+      <p className="text-blue-300 mt-4">
+        Starting May 1st, 2025 (International Workers' Day)
+      </p>
+    </div>
+  );
+};
+
+export default Countdown;
+
+
+# apps/matiautomatic-landing/src/components/Hero.tsx
+#------------------------------------------------
+import React from 'react';
+import MatiLogo from './MatiLogo';
+
+const Hero: React.FC = () => {
+  return (
+    <>
+      <div className="hero-background">
+        <div className="animated-gradient" id="animated-gradient"></div>
+        <div className="circuit-overlay"></div>
+        <div className="glow"></div>
+        <div className="canvas-container" id="particles-canvas"></div>
+      </div>
+      
+      <div className="launch-badge tooltip" id="launch-tooltip">
+        Campaign Starts: May 1, 2025
+        <span className="tooltip-text">Join us on International Workers' Day for the start of our 10-day campaign!</span>
+      </div>
+      
+      <main id="main-content" className="min-h-screen flex flex-col items-center justify-center px-6 py-20 relative overflow-hidden">
+        <div className="m-logo w-56 h-56 mb-10 floating" id="logo-container" tabIndex={0} aria-label="MatiAUTOmatic logo, click to interact">
+          <MatiLogo />
+        </div>
+        
+        <h1 className="text-5xl md:text-7xl font-extrabold mb-4 text-white text-center tracking-tight relative">
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-cyan-300">MatiAUTOmatic</span>
+        </h1>
+        
+        <p className="text-xl md:text-2xl font-light mb-8 text-blue-100 text-center">
+          Pioneering Physical AI Innovation
+        </p>
+        
+        <div className="glass-card p-6 max-w-2xl border border-blue-500/20">
+          <p className="text-base md:text-lg text-white/90 text-center leading-relaxed">
+            Hi, I'm Mati—Founder of SmartBuildLab.ai, innovating in automation, robotics, and Physical AI. Join me on this exciting journey!
+          </p>
+        </div>
+        
+        {/* M.A.T.I. Explanation */}
+        <div className="max-w-3xl mt-12 mb-8">
+          <h2 className="text-2xl font-bold text-center text-white mb-6">What is M.A.T.I.?</h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="mati-card p-5 focus-highlight" tabIndex={0} aria-label="M stands for Modular">
+              <div className="flex items-start">
+                <span className="mati-letter">M</span>
+                <div>
+                  <h3 className="text-xl font-semibold text-white">Modular</h3>
+                  <p className="text-blue-200 mt-1">Adaptable, flexible components</p>
+                </div>
+              </div>
+            </div>
+            
+            <div className="mati-card p-5 focus-highlight" tabIndex={0} aria-label="A stands for Artificial">
+              <div className="flex items-start">
+                <span className="mati-letter">A</span>
+                <div>
+                  <h3 className="text-xl font-semibold text-white">Artificial</h3>
+                  <p className="text-blue-200 mt-1">AI-driven intelligence</p>
+                </div>
+              </div>
+            </div>
+            
+            <div className="mati-card p-5 focus-highlight" tabIndex={0} aria-label="T stands for Tangible">
+              <div className="flex items-start">
+                <span className="mati-letter">T</span>
+                <div>
+                  <h3 className="text-xl font-semibold text-white">Tangible</h3>
+                  <p className="text-blue-200 mt-1">Physical, real-world presence</p>
+                </div>
+              </div>
+            </div>
+            
+            <div className="mati-card p-5 focus-highlight" tabIndex={0} aria-label="I stands for Intelligence">
+              <div className="flex items-start">
+                <span className="mati-letter">I</span>
+                <div>
+                  <h3 className="text-xl font-semibold text-white">Intelligence</h3>
+                  <p className="text-blue-200 mt-1">Autonomous learning & decision-making</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </>
+  );
+};
+
+export default Hero;
+
+
+# apps/matiautomatic-landing/src/components/MatiLogo.tsx
+#------------------------------------------------
+import React from 'react';
+
+const MatiLogo: React.FC = () => {
+  return (
+    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#0f4c8a" />
+          <stop offset="100%" stopColor="#33a3bc" />
+        </linearGradient>
+        <filter id="glow">
+          <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+          <feMerge>
+            <feMergeNode in="coloredBlur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>
+      <path d="M40,40 L40,160 L70,160 L70,100 L100,140 L130,100 L130,160 L160,160 L160,40 L100,120 L40,40 Z" fill="url(#logoGradient)" filter="url(#glow)"/>
+      <g fill="none" stroke="#59e6ff" strokeWidth="1.5">
+        <circle cx="40" cy="40" r="5" />
+        <circle cx="160" cy="40" r="5" />
+        <circle cx="160" cy="160" r="5" />
+        <circle cx="40" cy="160" r="5" />
+        <circle cx="100" cy="100" r="5" />
+        <line x1="45" y1="40" x2="155" y2="40" />
+        <line x1="40" y1="45" x2="40" y2="155" />
+        <line x1="160" y1="45" x2="160" y2="155" />
+        <line x1="45" y1="160" x2="65" y2="160" />
+        <line x1="75" y1="160" x2="125" y2="160" />
+        <line x1="135" y1="160" x2="155" y2="160" />
+        <line x1="100" y1="105" x2="100" y2="120" />
+        
+        {/* Additional circuit lines for tech feel */}
+        <line x1="40" y1="40" x2="100" y2="100" strokeDasharray="2,2" />
+        <line x1="160" y1="40" x2="100" y2="100" strokeDasharray="2,2" />
+        <circle cx="70" cy="70" r="2" />
+        <circle cx="130" cy="70" r="2" />
+        <circle cx="70" cy="130" r="2" />
+        <circle cx="130" cy="130" r="2" />
+      </g>
+    </svg>
+  );
+};
+
+export default MatiLogo;
+
+
+# apps/matiautomatic-landing/src/components/SocialLinks.tsx
+#------------------------------------------------
+import React from 'react';
+
+const SocialLinks: React.FC = () => {
+  return (
+    <footer className="pb-16 relative">
+      <div className="max-w-md mx-auto flex justify-center space-x-10">
+        <a href="#" target="_blank" rel="noopener noreferrer" className="social-icon tooltip" aria-label="LinkedIn Profile">
+          <svg className="w-8 h-8 text-blue-400" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+          </svg>
+          <span className="tooltip-text">Connect with us on LinkedIn</span>
+        </a>
+        
+        <a href="mailto:contact@matiautomatic.com" className="social-icon tooltip" aria-label="Email Us">
+          <svg className="w-8 h-8 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+          </svg>
+          <span className="tooltip-text">Send us an email</span>
+        </a>
+      </div>
+      
+      <div className="mt-8 text-center">
+        <p className="text-sm text-blue-400/70">
+          #PhysicalAI #MatiAUTOmatic #SmartBuildLab #AI #Robotics #Innovation
+        </p>
+      </div>
+    </footer>
+  );
+};
+
+export default SocialLinks;
+
+
+# apps/matiautomatic-landing/src/components/SubscriptionForm.tsx
+#------------------------------------------------
+import React, { useState, FormEvent } from 'react';
+
+interface FormData {
+  email: string;
+  name: string;
+  phone: string;
+}
+
+const SubscriptionForm: React.FC = () => {
+  const [formData, setFormData] = useState<FormData>({
+    email: '',
+    name: '',
+    phone: ''
+  });
+  
+  const [status, setStatus] = useState<{
+    message: string;
+    isError: boolean;
+  } | null>(null);
+  
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setStatus(null);
+    
+    try {
+      // In a real implementation, this would call your API endpoint
+      // that connects to Mailchimp/MailerLite
+      // For now, we'll simulate a successful submission
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
+      setStatus({
+        message: "Thank you for subscribing! You will be notified of updates.",
+        isError: false
+      });
+      
+      // Reset form
+      setFormData({
+        email: '',
+        name: '',
+        phone: ''
+      });
+    } catch (error) {
+      setStatus({
+        message: "Sorry, there was an error. Please try again later.",
+        isError: true
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <section className="py-20 px-6 relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-b from-blue-900/50 to-black/80 z-0"></div>
+      
+      <div className="max-w-md mx-auto relative z-10">
+        <div className="form-container p-8 focus-highlight">
+          <h2 className="text-2xl font-bold mb-6 text-white">Join the Revolution</h2>
+          
+          <form className="space-y-5" onSubmit={handleSubmit}>
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium text-blue-300 mb-1">Email Address *</label>
+              <input 
+                type="email" 
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                required 
+                className="w-full px-4 py-3 rounded-md transition duration-200"
+                placeholder="your@email.com"
+                aria-required="true"
+              />
+            </div>
+            
+            <div>
+              <label htmlFor="name" className="block text-sm font-medium text-blue-300 mb-1">Name (Optional)</label>
+              <input 
+                type="text" 
+                id="name"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                className="w-full px-4 py-3 rounded-md transition duration-200"
+                placeholder="Your Name"
+              />
+            </div>
+            
+            <div>
+              <label htmlFor="phone" className="block text-sm font-medium text-blue-300 mb-1">Phone Number (Optional)</label>
+              <input 
+                type="tel" 
+                id="phone"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                className="w-full px-4 py-3 rounded-md transition duration-200"
+                placeholder="+1 (123) 456-7890"
+              />
+            </div>
+            
+            <button 
+              type="submit" 
+              disabled={isSubmitting}
+              className="w-full gradient-button text-white font-medium py-3 px-4 rounded-md flex justify-center items-center"
+            >
+              {isSubmitting ? (
+                <span className="flex items-center">
+                  <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  Processing...
+                </span>
+              ) : "Subscribe for Updates"}
+            </button>
+            
+            {status && (
+              <div className={`text-sm p-3 rounded ${status.isError ? 'bg-red-500/20 text-red-100' : 'bg-green-500/20 text-green-100'}`}>
+                {status.message}
+              </div>
+            )}
+            
+            <p className="text-xs text-blue-300/70 text-center mt-4">
+              Stay updated with the latest in Physical AI innovation.<br />
+              Follow our LinkedIn campaign starting May 1st!
+            </p>
+          </form>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default SubscriptionForm;
+
+
+# apps/matiautomatic-landing/src/styles/index.css
+#------------------------------------------------
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #031225;
+  --text-primary: #ffffff;
+  --text-secondary: #b3d5ff;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background-color: var(--background);
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+.bg-darkBlue {
+  background-color: #031225;
+}
+
+/* For buttons with gradient hover effect */
+.gradient-button {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+
+.gradient-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+input {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  transition: all 0.2s ease;
+}
+
+input:focus {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #33a3bc;
+  box-shadow: 0 0 0 3px rgba(89, 230, 255, 0.2);
+  outline: none;
+  transform: translateY(-2px);
+}
+
+
+# apps/matiautomatic-landing/src/App.tsx
+#------------------------------------------------
+import React from 'react';
+import './styles/index.css';
+
+const App: React.FC = () => {
+  React.useEffect(() => {
+    // Countdown Timer functionality
+    const updateCountdown = () => {
+      const countDownDate = new Date("May 1, 2025 00:00:00").getTime();
+      const now = new Date().getTime();
+      const timeRemaining = countDownDate - now;
+      
+      // Calculate days, hours, minutes and seconds
+      const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+      
+      // Display the results
+      const daysElement = document.getElementById("days");
+      const hoursElement = document.getElementById("hours");
+      const minutesElement = document.getElementById("minutes");
+      const secondsElement = document.getElementById("seconds");
+      
+      if (daysElement) daysElement.textContent = days < 10 ? '0' + days : days.toString();
+      if (hoursElement) hoursElement.textContent = hours < 10 ? '0' + hours : hours.toString();
+      if (minutesElement) minutesElement.textContent = minutes < 10 ? '0' + minutes : minutes.toString();
+      if (secondsElement) secondsElement.textContent = seconds < 10 ? '0' + seconds : seconds.toString();
+    };
+
+    // Initial update
+    updateCountdown();
+    
+    // Update every second
+    const interval = setInterval(updateCountdown, 1000);
+    
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-darkBlue text-white">
+      {/* Hero Section */}
+      <main className="container mx-auto px-4 py-16">
+        <div className="flex flex-col items-center justify-center">
+          <div className="text-center mb-16">
+            <h1 className="text-5xl font-bold mb-4">MatiAUTOmatic</h1>
+            <p className="text-xl text-blue-200">Pioneering Physical AI Innovation</p>
+            <div className="max-w-2xl mx-auto mt-8 p-6 bg-blue-900/20 rounded-lg">
+              <p className="text-lg">
+                Hi, I'm Mati—Founder of SmartBuildLab.ai, innovating in automation, robotics, and Physical AI. Join me on this exciting journey!
+              </p>
+            </div>
+          </div>
+          
+          {/* MATI Explanation */}
+          <div className="max-w-4xl w-full">
+            <h2 className="text-3xl font-bold text-center mb-10">What is M.A.T.I.?</h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="bg-blue-900/20 p-6 rounded-lg">
+                <div className="flex items-start">
+                  <span className="text-4xl text-pink-500 font-bold mr-4">M</span>
+                  <div>
+                    <h3 className="text-xl font-bold">Modular</h3>
+                    <p className="text-blue-200">Adaptable, flexible components</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="bg-blue-900/20 p-6 rounded-lg">
+                <div className="flex items-start">
+                  <span className="text-4xl text-pink-500 font-bold mr-4">A</span>
+                  <div>
+                    <h3 className="text-xl font-bold">Artificial</h3>
+                    <p className="text-blue-200">AI-driven intelligence</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="bg-blue-900/20 p-6 rounded-lg">
+                <div className="flex items-start">
+                  <span className="text-4xl text-pink-500 font-bold mr-4">T</span>
+                  <div>
+                    <h3 className="text-xl font-bold">Tangible</h3>
+                    <p className="text-blue-200">Physical, real-world presence</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="bg-blue-900/20 p-6 rounded-lg">
+                <div className="flex items-start">
+                  <span className="text-4xl text-pink-500 font-bold mr-4">I</span>
+                  <div>
+                    <h3 className="text-xl font-bold">Intelligence</h3>
+                    <p className="text-blue-200">Autonomous learning & decision-making</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          {/* Countdown */}
+          <div className="mt-16 text-center">
+            <h3 className="text-2xl font-bold mb-4">The 10 Principles of Physical AI (M.A.T.I.)</h3>
+            <p className="text-lg mb-6">Campaign Starts on International Workers' Day</p>
+            
+            <div className="flex justify-center space-x-4">
+              <div className="bg-blue-900/30 p-4 rounded-lg">
+                <span id="days" className="text-3xl font-bold block">00</span>
+                <span className="text-sm text-blue-300">Days</span>
+              </div>
+              <div className="bg-blue-900/30 p-4 rounded-lg">
+                <span id="hours" className="text-3xl font-bold block">11</span>
+                <span className="text-sm text-blue-300">Hours</span>
+              </div>
+              <div className="bg-blue-900/30 p-4 rounded-lg">
+                <span id="minutes" className="text-3xl font-bold block">39</span>
+                <span className="text-sm text-blue-300">Minutes</span>
+              </div>
+              <div className="bg-blue-900/30 p-4 rounded-lg">
+                <span id="seconds" className="text-3xl font-bold block">18</span>
+                <span className="text-sm text-blue-300">Seconds</span>
+              </div>
+            </div>
+            
+            <p className="mt-6 text-blue-300">
+              Starting May 1st, 2025 (International Workers' Day)
+            </p>
+          </div>
+        </div>
+      </main>
+      
+      {/* Subscription Section */}
+      <section className="py-16 bg-indigo-900/50">
+        <div className="container mx-auto px-4">
+          <div className="max-w-md mx-auto">
+            <h2 className="text-3xl font-bold mb-8 text-center">Join the Revolution</h2>
+            
+            <form className="space-y-6">
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium mb-1">Email Address *</label>
+                <input 
+                  type="email" 
+                  id="email" 
+                  required 
+                  className="w-full px-4 py-3 rounded-lg bg-blue-900/20 border border-blue-700 text-white"
+                  placeholder="your@email.com"
+                />
+              </div>
+              
+              <div>
+                <label htmlFor="name" className="block text-sm font-medium mb-1">Name (Optional)</label>
+                <input 
+                  type="text" 
+                  id="name" 
+                  className="w-full px-4 py-3 rounded-lg bg-blue-900/20 border border-blue-700 text-white"
+                  placeholder="Your Name"
+                />
+              </div>
+              
+              <div>
+                <label htmlFor="phone" className="block text-sm font-medium mb-1">Phone Number (Optional)</label>
+                <input 
+                  type="tel" 
+                  id="phone" 
+                  className="w-full px-4 py-3 rounded-lg bg-blue-900/20 border border-blue-700 text-white"
+                  placeholder="+1 (123) 456-7890"
+                />
+              </div>
+              
+              <button 
+                type="submit" 
+                className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-medium py-3 px-4 rounded-lg"
+              >
+                Subscribe for Updates
+              </button>
+              
+              <p className="text-xs text-center mt-4">
+                Stay updated with the latest in Physical AI innovation.<br />
+                Follow our LinkedIn campaign starting May 1st!
+              </p>
+            </form>
+          </div>
+        </div>
+      </section>
+      
+      {/* Footer */}
+      <footer className="py-8 bg-black/30">
+        <div className="container mx-auto px-4">
+          <div className="flex justify-center space-x-8 mb-6">
+            <a href="#" className="text-blue-400 hover:text-blue-300">
+              <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
+            </a>
+            
+            <a href="mailto:contact@matiautomatic.com" className="text-blue-400 hover:text-blue-300">
+              <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+              </svg>
+            </a>
+          </div>
+          
+          <div className="text-center">
+            <p className="text-sm text-blue-400/70">
+              #PhysicalAI #MatiAUTOmatic #SmartBuildLab #AI #Robotics #Innovation
+            </p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+export default App;
+
+
+# apps/matiautomatic-landing/src/main.tsx
+#------------------------------------------------
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App'
+import './styles/index.css'
+
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+)
+
+
+# apps/matiautomatic-landing/.env
+#------------------------------------------------
+# API Keys for Mailchimp or MailerLite (replace with actual values)
+VITE_MAILCHIMP_API_KEY=your_api_key_here
+VITE_MATIAUTOMATIC_LIST_ID=your_list_id_here
+
+
+# apps/matiautomatic-landing/index.html
+#------------------------------------------------
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MatiAUTOmatic - Pioneering Physical AI Innovation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <meta name="description" content="MatiAUTOmatic - Pioneering Physical AI. Join founder Mati on a journey of automation, robotics, and innovation." />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
+
+# apps/matiautomatic-landing/package.json
+#------------------------------------------------
+{
+    "name": "matiautomatic-landing",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+      "dev": "vite",
+      "build": "tsc && vite build",
+      "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+      "preview": "vite preview"
+    },
+    "dependencies": {
+      "react": "^18.2.0",
+      "react-dom": "^18.2.0"
+    },
+    "devDependencies": {
+      "@types/react": "^18.2.15",
+      "@types/react-dom": "^18.2.7",
+      "@typescript-eslint/eslint-plugin": "^6.0.0",
+      "@typescript-eslint/parser": "^6.0.0",
+      "@vitejs/plugin-react": "^4.0.3",
+      "autoprefixer": "^10.4.14",
+      "eslint": "^8.45.0",
+      "eslint-plugin-react-hooks": "^4.6.0",
+      "eslint-plugin-react-refresh": "^0.4.3",
+      "postcss": "^8.4.27",
+      "tailwindcss": "^3.3.3",
+      "typescript": "^5.0.2",
+      "vite": "^4.4.5"
+    }
+  }
+
+
+# apps/matiautomatic-landing/postcss.config.js
+#------------------------------------------------
+export default {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {},
+    },
+  }
+
+
+# apps/matiautomatic-landing/tailwind.config.js
+#------------------------------------------------
+/** @type {import('tailwindcss').Config} */
+export default {
+    content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+    theme: {
+      extend: {
+        colors: {
+          darkBlue: '#031225',
+          blue: {
+            900: '#052444',
+            800: '#0f4c8a',
+            700: '#33a3bc',
+            200: '#b3d5ff'
+          },
+          pink: {
+            500: '#d946ef'
+          },
+          indigo: {
+            900: '#312e81'
+          }
+        },
+        fontFamily: {
+          sans: ['Montserrat', 'sans-serif'],
+        },
+      },
+    },
+    plugins: [],
+  }
+
+
+# apps/matiautomatic-landing/vite.config.ts
+#------------------------------------------------
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [react()],
+})
+
+
+# Directory: /workspaces/MATI_campaing_Landing/apps/smartbuildlab-landing/node_modules
+#------------------------------------------------
+# Contents:
+  Directory: .vite/
+
+
+# apps/smartbuildlab-landing/src/components/Countdown.tsx
+#------------------------------------------------
+import React, { useState, useEffect } from 'react';
+
+const Countdown: React.FC = () => {
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0
+  });
+  
+  const [isLaunched, setIsLaunched] = useState(false);
+
+  useEffect(() => {
+    const countDownDate = new Date("May 1, 2025 00:00:00").getTime();
+    
+    const updateCountdown = () => {
+      const now = new Date().getTime();
+      const distance = countDownDate - now;
+      
+      if (distance < 0) {
+        setIsLaunched(true);
+        return;
+      }
+      
+      setTimeLeft({
+        days: Math.floor(distance / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+        minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
+        seconds: Math.floor((distance % (1000 * 60)) / 1000)
+      });
+    };
+    
+    // Initial update
+    updateCountdown();
+    
+    // Update every second
+    const interval = setInterval(updateCountdown, 1000);
+    
+    return () => clearInterval(interval);
+  }, []);
+
+  const formatNumber = (num: number) => {
+    return num < 10 ? `0${num}` : num.toString();
+  };
+
+  return (
+    <div className="mt-6 text-center">
+      <h3 className="text-lg font-medium text-purple-300 mb-3">The 10 Principles of Physical AI (M.A.T.I.)</h3>
+      <p className="text-sm text-purple-200 mb-3">Campaign Starts on International Workers' Day</p>
+      
+      <div className="countdown" id="countdown">
+        {isLaunched ? (
+          <div className="countdown-item bg-gradient-to-r from-purple-600 to-orange-500 text-white">
+            <span className="text-2xl font-bold">LAUNCHED!</span>
+          </div>
+        ) : (
+          <>
+            <div className="countdown-item tooltip">
+              <span className="text-2xl font-bold text-white" id="days">{formatNumber(timeLeft.days)}</span>
+              <span className="text-xs text-purple-300">Days</span>
+              <span className="tooltip-text">{timeLeft.days} day(s) until campaign launch!</span>
+            </div>
+            <div className="countdown-item tooltip">
+              <span className="text-2xl font-bold text-white" id="hours">{formatNumber(timeLeft.hours)}</span>
+              <span className="text-xs text-purple-300">Hours</span>
+              <span className="tooltip-text">Hours remaining until campaign launch</span>
+            </div>
+            <div className="countdown-item tooltip">
+              <span className="text-2xl font-bold text-white" id="minutes">{formatNumber(timeLeft.minutes)}</span>
+              <span className="text-xs text-purple-300">Minutes</span>
+              <span className="tooltip-text">Minutes remaining until campaign launch</span>
+            </div>
+            <div className="countdown-item tooltip">
+              <span className="text-2xl font-bold text-white" id="seconds">{formatNumber(timeLeft.seconds)}</span>
+              <span className="text-xs text-purple-300">Seconds</span>
+              <span className="tooltip-text">Seconds remaining until campaign launch</span>
+            </div>
+          </>
+        )}
+      </div>
+      
+      <p className="text-purple-300 mt-4">
+        Starting May 1st, 2025 (International Workers' Day)
+      </p>
+    </div>
+  );
+};
+
+export default Countdown;
+
+
+# apps/smartbuildlab-landing/src/components/FeaturePrinciples.tsx
+#------------------------------------------------
+import React from 'react';
+
+const FeaturePrinciples: React.FC = () => {
+  return (
+    <section className="py-16 px-6 relative">
+      <div className="max-w-6xl mx-auto">
+        <h2 className="text-3xl font-bold mb-10 text-center text-white">
+          Featured Principles of <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-orange-400">Physical AI</span>
+        </h2>
+        
+        <div className="featured-principles">
+          <div className="glass-card principle-card p-6" tabIndex={0}>
+            <div className="flex items-center mb-4">
+              <span className="text-purple-400 mr-3 text-2xl">1️⃣</span>
+              <h3 className="text-xl font-semibold text-white">Connects to the Digital</h3>
+            </div>
+            <p className="text-white/80">
+              Physical AI bridges simulation (NVIDIA Isaac Sim, BIM, CAD) to real-world execution seamlessly.
+            </p>
+          </div>
+          
+          <div className="glass-card principle-card p-6" tabIndex={0}>
+            <div className="flex items-center mb-4">
+              <span className="text-purple-400 mr-3 text-2xl">2️⃣</span>
+              <h3 className="text-xl font-semibold text-white">Builds the Next</h3>
+            </div>
+            <p className="text-white/80">
+              Autonomous self-replication: AI units constructing new versions of themselves.
+            </p>
+          </div>
+          
+          <div className="glass-card principle-card p-6" tabIndex={0}>
+            <div className="flex items-center mb-4">
+              <span className="text-purple-400 mr-3 text-2xl">3️⃣</span>
+              <h3 className="text-xl font-semibold text-white">Speaks to the Next</h3>
+            </div>
+            <p className="text-white/80">
+              Robots communicating in real-time, collaboratively solving complex tasks.
+            </p>
+          </div>
+          
+          <div className="glass-card principle-card p-6" tabIndex={0}>
+            <div className="flex items-center mb-4">
+              <span className="text-purple-400 mr-3 text-2xl">4️⃣</span>
+              <h3 className="text-xl font-semibold text-white">Repairs Itself</h3>
+            </div>
+            <p className="text-white/80">
+              AI diagnosing and fixing itself autonomously, zero downtime.
+            </p>
+          </div>
+        </div>
+        
+        <div className="text-center mt-10">
+          <p className="text-white/80 mb-6">Follow our LinkedIn campaign to discover all 10 principles, with one principle revealed each day starting May 1st!</p>
+          <a href="#subscription" className="inline-block gradient-button py-3 px-8 rounded-full text-white font-medium">
+            Stay Updated
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default FeaturePrinciples;
+
+
+# apps/smartbuildlab-landing/src/components/Hero.tsx
+#------------------------------------------------
+import React from 'react';
+import SmartBuildLogo from './SmartBuildLogo';
+
+const Hero: React.FC = () => {
+  return (
+    <>
+      {/* Hero Background */}
+      <div className="hero-gradient"></div>
+      <div className="hero-overlay"></div>
+      <div className="animated-bg">
+        <div className="circle-decoration circle-1"></div>
+        <div className="circle-decoration circle-2"></div>
+        <div className="circle-decoration circle-3"></div>
+      </div>
+      
+      {/* Launch Badge */}
+      <div className="launch-badge tooltip" id="launch-tooltip">
+        Campaign Starts: May 1, 2025
+        <span className="tooltip-text">Join us on International Workers' Day for the start of our 10-day campaign!</span>
+      </div>
+      
+      {/* Hero Section */}
+      <main id="main-content" className="min-h-screen relative flex flex-col items-center justify-center px-6 py-20">
+        <div className="logo-container mb-10" tabIndex={0} aria-label="SmartBuildLab.ai logo, click to interact">
+          <div className="logo-inner">
+            <SmartBuildLogo />
+          </div>
+        </div>
+        
+        <h1 className="text-4xl md:text-6xl font-bold mb-6 text-center">
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-orange-400">
+            Building the Future with Physical AI
+          </span>
+        </h1>
+        
+        <div className="glass-card p-6 max-w-2xl">
+          <p className="text-base md:text-lg text-white/90 text-center leading-relaxed">
+            SmartBuildLab.ai specializes in revolutionary Physical AI technology, innovating automation and robotics to transform industries.
+          </p>
+        </div>
+      </main>
+    </>
+  );
+};
+
+export default Hero;
+
+
+# apps/smartbuildlab-landing/src/components/MatiExplanation.tsx
+#------------------------------------------------
+import React from 'react';
+
+const MatiExplanation: React.FC = () => {
+  return (
+    <div className="max-w-3xl mt-12 mb-8">
+      <h2 className="text-2xl font-bold text-center text-white mb-6">What is M.A.T.I.?</h2>
+      
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mati-grid">
+        <div className="mati-card p-5 focus-highlight" tabIndex={0} aria-label="M stands for Modular">
+          <div className="flex items-start">
+            <span className="mati-letter">M</span>
+            <div>
+              <h3 className="text-xl font-semibold text-white">Modular</h3>
+              <p className="text-purple-200 mt-1">Adaptable, flexible components</p>
+            </div>
+          </div>
+        </div>
+        
+        <div className="mati-card p-5 focus-highlight" tabIndex={0} aria-label="A stands for Artificial">
+          <div className="flex items-start">
+            <span className="mati-letter">A</span>
+            <div>
+              <h3 className="text-xl font-semibold text-white">Artificial</h3>
+              <p className="text-purple-200 mt-1">AI-driven intelligence</p>
+            </div>
+          </div>
+        </div>
+        
+        <div className="mati-card p-5 focus-highlight" tabIndex={0} aria-label="T stands for Tangible">
+          <div className="flex items-start">
+            <span className="mati-letter">T</span>
+            <div>
+              <h3 className="text-xl font-semibold text-white">Tangible</h3>
+              <p className="text-purple-200 mt-1">Physical, real-world presence</p>
+            </div>
+          </div>
+        </div>
+        
+        <div className="mati-card p-5 focus-highlight" tabIndex={0} aria-label="I stands for Intelligence">
+          <div className="flex items-start">
+            <span className="mati-letter">I</span>
+            <div>
+              <h3 className="text-xl font-semibold text-white">Intelligence</h3>
+              <p className="text-purple-200 mt-1">Autonomous learning & decision-making</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default MatiExplanation;
+
+
+# apps/smartbuildlab-landing/src/components/SmartBuildLogo.tsx
+#------------------------------------------------
+import React from 'react';
+
+const SmartBuildLogo: React.FC = () => {
+  return (
+    <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="circleGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#1e3a8a" />
+          <stop offset="50%" stopColor="#7e22ce" />
+          <stop offset="100%" stopColor="#ea580c" />
+        </linearGradient>
+        <filter id="glow">
+          <feGaussianBlur stdDeviation="5" result="coloredBlur"/>
+          <feMerge>
+            <feMergeNode in="coloredBlur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>
+      
+      {/* Main circle */}
+      <circle cx="200" cy="200" r="180" fill="none" stroke="url(#circleGradient)" strokeWidth="4" filter="url(#glow)"/>
+      
+      {/* Inner elements representing a tech city/skyline */}
+      <g fill="white" opacity="0.9">
+        {/* Skyline/buildings representation */}
+        <rect x="100" y="160" width="30" height="100"/>
+        <rect x="140" y="140" width="30" height="120"/>
+        <rect x="180" y="120" width="40" height="140"/>
+        <rect x="230" y="150" width="30" height="110"/>
+        <rect x="270" y="170" width="30" height="90"/>
+        
+        {/* Small connecting elements */}
+        <circle cx="100" cy="150" r="5"/>
+        <circle cx="150" cy="130" r="5"/>
+        <circle cx="200" cy="110" r="5"/>
+        <circle cx="250" cy="140" r="5"/>
+        <circle cx="290" cy="160" r="5"/>
+        
+        <circle cx="120" cy="270" r="5"/>
+        <circle cx="170" cy="270" r="5"/>
+        <circle cx="220" cy="270" r="5"/>
+        <circle cx="270" cy="270" r="5"/>
+        
+        {/* Connection lines */}
+        <line x1="100" y1="150" x2="100" y2="160" stroke="white" strokeWidth="2"/>
+        <line x1="150" y1="130" x2="150" y2="140" stroke="white" strokeWidth="2"/>
+        <line x1="200" y1="110" x2="200" y2="120" stroke="white" strokeWidth="2"/>
+        <line x1="250" y1="140" x2="250" y2="150" stroke="white" strokeWidth="2"/>
+        <line x1="290" y1="160" x2="290" y2="170" stroke="white" strokeWidth="2"/>
+      </g>
+      
+      {/* Outer connection nodes and lines */}
+      <g fill="white" opacity="0.7">
+        <circle cx="70" cy="70" r="6"/>
+        <circle cx="330" cy="70" r="6"/>
+        <circle cx="70" cy="330" r="6"/>
+        <circle cx="330" cy="330" r="6"/>
+        
+        <line x1="70" y1="76" x2="70" y2="324" stroke="white" strokeWidth="1.5" opacity="0.5"/>
+        <line x1="76" y1="70" x2="324" y2="70" stroke="white" strokeWidth="1.5" opacity="0.5"/>
+        <line x1="330" y1="76" x2="330" y2="324" stroke="white" strokeWidth="1.5" opacity="0.5"/>
+        <line x1="76" y1="330" x2="324" y2="330" stroke="white" strokeWidth="1.5" opacity="0.5"/>
+      </g>
+    </svg>
+  );
+};
+
+export default SmartBuildLogo;
+
+
+# apps/smartbuildlab-landing/src/components/SocialLinks.tsx
+#------------------------------------------------
+import React from 'react';
+
+const SocialLinks: React.FC = () => {
+  return (
+    <footer className="pb-16 relative">
+      <div className="max-w-md mx-auto flex justify-center space-x-10">
+        <a href="#" target="_blank" rel="noopener noreferrer" className="social-icon tooltip" aria-label="LinkedIn Profile">
+          <svg className="w-8 h-8 text-purple-400" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+          </svg>
+          <span className="tooltip-text">Connect with us on LinkedIn</span>
+        </a>
+        
+        <a href="mailto:info@smartbuildlab.ai" className="social-icon tooltip" aria-label="Email Us">
+          <svg className="w-8 h-8 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+          </svg>
+          <span className="tooltip-text">Send us an email</span>
+        </a>
+      </div>
+      
+      <div className="mt-8 text-center">
+        <p className="text-sm text-purple-400/70">
+          #PhysicalAI #SmartBuildLab #MatiAUTOmatic #AI #Robotics #Innovation #WorkersDay
+        </p>
+      </div>
+    </footer>
+  );
+};
+
+export default SocialLinks;
+
+
+# apps/smartbuildlab-landing/src/components/SubscriptionForm.tsx
+#------------------------------------------------
+import React, { useState, FormEvent } from 'react';
+
+interface FormData {
+  email: string;
+  name: string;
+  phone: string;
+}
+
+const SubscriptionForm: React.FC = () => {
+  const [formData, setFormData] = useState<FormData>({
+    email: '',
+    name: '',
+    phone: ''
+  });
+  
+  const [status, setStatus] = useState<{
+    message: string;
+    isError: boolean;
+  } | null>(null);
+  
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setStatus(null);
+    
+    try {
+      // In a real implementation, this would call your API endpoint
+      // that connects to Mailchimp/MailerLite
+      // For now, we'll simulate a successful submission
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
+      setStatus({
+        message: "Thank you for subscribing! You will be notified of updates.",
+        isError: false
+      });
+      
+      // Reset form
+      setFormData({
+        email: '',
+        name: '',
+        phone: ''
+      });
+    } catch (error) {
+      setStatus({
+        message: "Sorry, there was an error. Please try again later.",
+        isError: true
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <section id="subscription" className="py-20 px-6 relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-b from-purple-900/30 to-black/90 z-0"></div>
+      
+      <div className="max-w-md mx-auto relative z-10">
+        <div className="form-container p-8 focus-highlight">
+          <h2 className="text-2xl font-bold mb-6 text-white">Get Notified</h2>
+          
+          <form className="space-y-5" onSubmit={handleSubmit}>
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium text-purple-300 mb-1">Email Address *</label>
+              <input 
+                type="email" 
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                required 
+                className="w-full px-4 py-3 rounded-md transition duration-200"
+                placeholder="your@email.com"
+                aria-required="true"
+              />
+            </div>
+            
+            <div>
+              <label htmlFor="name" className="block text-sm font-medium text-purple-300 mb-1">Name (Optional)</label>
+              <input 
+                type="text" 
+                id="name"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                className="w-full px-4 py-3 rounded-md transition duration-200"
+                placeholder="Your Name"
+              />
+            </div>
+            
+            <div>
+              <label htmlFor="phone" className="block text-sm font-medium text-purple-300 mb-1">Phone Number (Optional)</label>
+              <input 
+                type="tel" 
+                id="phone"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                className="w-full px-4 py-3 rounded-md transition duration-200"
+                placeholder="+1 (123) 456-7890"
+              />
+            </div>
+            
+            <button 
+              type="submit" 
+              disabled={isSubmitting}
+              className="w-full gradient-button text-white font-medium py-3 px-4 rounded-md flex justify-center items-center"
+            >
+              {isSubmitting ? (
+                <span className="flex items-center">
+                  <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  Processing...
+                </span>
+              ) : "Get Notified"}
+            </button>
+            
+            {status && (
+              <div className={`text-sm p-3 rounded ${status.isError ? 'bg-red-500/20 text-red-100' : 'bg-green-500/20 text-green-100'}`}>
+                {status.message}
+              </div>
+            )}
+            
+            <p className="text-xs text-purple-300/70 text-center mt-4">
+              Be the first to know about breakthroughs in Physical AI.<br />
+              Follow our LinkedIn campaign starting May 1st!
+            </p>
+          </form>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default SubscriptionForm;
+
+
+# apps/smartbuildlab-landing/src/styles/index.css
+#------------------------------------------------
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-blue: #1e3a8a;
+  --primary-purple: #7e22ce;
+  --primary-orange: #ea580c;
+  --background: #160b38;
+  --text-primary: #ffffff;
+  --text-secondary: #e9d8fd;
+  --card-bg: rgba(126, 34, 206, 0.1);
+  --card-border: rgba(234, 88, 12, 0.3);
+  --glow-color: rgba(234, 88, 12, 0.2);
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background-color: var(--background);
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+.bg-deepPurple {
+  background-color: #160b38;
+}
+
+.glass-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+  border-color: var(--primary-orange);
+}
+
+.principle-card {
+  position: relative;
+  overflow: hidden;
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.principle-card:hover {
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+}
+
+.form-container {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(234, 88, 12, 0.2);
+  border-radius: 12px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.mati-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.mati-card:hover {
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+  border-color: var(--primary-orange);
+}
+
+.mati-letter {
+  font-size: 2.5rem;
+  font-weight: 800;
+  background: linear-gradient(to right, var(--primary-purple), var(--primary-orange));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-right: 1rem;
+}
+
+.countdown-item {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(234, 88, 12, 0.2);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  min-width: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.countdown-item:hover {
+  transform: translateY(-3px);
+  border-color: var(--primary-orange);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.gradient-button {
+  background: linear-gradient(45deg, var(--primary-purple), var(--primary-orange));
+  border: none;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.gradient-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.social-icon {
+  transition: all 0.3s ease;
+  opacity: 0.8;
+}
+
+.social-icon:hover {
+  transform: translateY(-5px) scale(1.1);
+  opacity: 1;
+}
+
+input {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  transition: all 0.2s ease;
+}
+
+input:focus {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--primary-orange);
+  box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.3);
+  outline: none;
+  transform: translateY(-2px);
+}
+
+
+# apps/smartbuildlab-landing/src/App.tsx
+#------------------------------------------------
+import React from 'react';
+import './styles/index.css';
+
+const App: React.FC = () => {
+  React.useEffect(() => {
+    // Countdown Timer functionality
+    const updateCountdown = () => {
+      const countDownDate = new Date("May 1, 2025 00:00:00").getTime();
+      const now = new Date().getTime();
+      const timeRemaining = countDownDate - now;
+      
+      // Calculate days, hours, minutes and seconds
+      const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+      
+      // Display the results
+      const daysElement = document.getElementById("days");
+      const hoursElement = document.getElementById("hours");
+      const minutesElement = document.getElementById("minutes");
+      const secondsElement = document.getElementById("seconds");
+      
+      if (daysElement) daysElement.textContent = days < 10 ? '0' + days : days.toString();
+      if (hoursElement) hoursElement.textContent = hours < 10 ? '0' + hours : hours.toString();
+      if (minutesElement) minutesElement.textContent = minutes < 10 ? '0' + minutes : minutes.toString();
+      if (secondsElement) secondsElement.textContent = seconds < 10 ? '0' + seconds : seconds.toString();
+    };
+
+    // Initial update
+    updateCountdown();
+    
+    // Update every second
+    const interval = setInterval(updateCountdown, 1000);
+    
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-deepPurple text-white">
+      {/* Hero Section */}
+      <main className="container mx-auto px-4 py-16">
+        <div className="flex flex-col items-center justify-center">
+          <div className="text-center mb-16">
+            <h1 className="text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-orange-400">
+              Building the Future with Physical AI
+            </h1>
+            <div className="max-w-2xl mx-auto mt-8 p-6 glass-card">
+              <p className="text-lg text-white/90">
+                SmartBuildLab.ai specializes in revolutionary Physical AI technology, innovating automation and robotics to transform industries.
+              </p>
+            </div>
+          </div>
+          
+          {/* MATI Explanation */}
+          <div className="max-w-4xl w-full">
+            <h2 className="text-3xl font-bold text-center mb-10">What is M.A.T.I.?</h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="mati-card p-5">
+                <div className="flex items-start">
+                  <span className="mati-letter">M</span>
+                  <div>
+                    <h3 className="text-xl font-semibold">Modular</h3>
+                    <p className="text-purple-200 mt-1">Adaptable, flexible components</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="mati-card p-5">
+                <div className="flex items-start">
+                  <span className="mati-letter">A</span>
+                  <div>
+                    <h3 className="text-xl font-semibold">Artificial</h3>
+                    <p className="text-purple-200 mt-1">AI-driven intelligence</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="mati-card p-5">
+                <div className="flex items-start">
+                  <span className="mati-letter">T</span>
+                  <div>
+                    <h3 className="text-xl font-semibold">Tangible</h3>
+                    <p className="text-purple-200 mt-1">Physical, real-world presence</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="mati-card p-5">
+                <div className="flex items-start">
+                  <span className="mati-letter">I</span>
+                  <div>
+                    <h3 className="text-xl font-semibold">Intelligence</h3>
+                    <p className="text-purple-200 mt-1">Autonomous learning & decision-making</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          {/* Countdown */}
+          <div className="mt-16 text-center">
+            <h3 className="text-2xl font-medium text-purple-300 mb-3">The 10 Principles of Physical AI (M.A.T.I.)</h3>
+            <p className="text-purple-200 mb-6">Campaign Starts on International Workers' Day</p>
+            
+            <div className="flex justify-center space-x-4">
+              <div className="countdown-item">
+                <span id="days" className="text-3xl font-bold block">00</span>
+                <span className="text-sm text-purple-300">Days</span>
+              </div>
+              <div className="countdown-item">
+                <span id="hours" className="text-3xl font-bold block">11</span>
+                <span className="text-sm text-purple-300">Hours</span>
+              </div>
+              <div className="countdown-item">
+                <span id="minutes" className="text-3xl font-bold block">39</span>
+                <span className="text-sm text-purple-300">Minutes</span>
+              </div>
+              <div className="countdown-item">
+                <span id="seconds" className="text-3xl font-bold block">18</span>
+                <span className="text-sm text-purple-300">Seconds</span>
+              </div>
+            </div>
+            
+            <p className="mt-6 text-purple-300">
+              Starting May 1st, 2025 (International Workers' Day)
+            </p>
+          </div>
+        </div>
+      </main>
+      
+      {/* Featured Principles Section */}
+      <section className="py-16 px-6 relative">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl font-bold mb-10 text-center">
+            Featured Principles of <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-orange-400">Physical AI</span>
+          </h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="principle-card p-6">
+              <div className="flex items-center mb-4">
+                <span className="text-purple-400 mr-3 text-2xl">1️⃣</span>
+                <h3 className="text-xl font-semibold">Connects to the Digital</h3>
+              </div>
+              <p className="text-white/80">
+                Physical AI bridges simulation (NVIDIA Isaac Sim, BIM, CAD) to real-world execution seamlessly.
+              </p>
+            </div>
+            
+            <div className="principle-card p-6">
+              <div className="flex items-center mb-4">
+                <span className="text-purple-400 mr-3 text-2xl">2️⃣</span>
+                <h3 className="text-xl font-semibold">Builds the Next</h3>
+              </div>
+              <p className="text-white/80">
+                Autonomous self-replication: AI units constructing new versions of themselves.
+              </p>
+            </div>
+            
+            <div className="principle-card p-6">
+              <div className="flex items-center mb-4">
+                <span className="text-purple-400 mr-3 text-2xl">3️⃣</span>
+                <h3 className="text-xl font-semibold">Speaks to the Next</h3>
+              </div>
+              <p className="text-white/80">
+                Robots communicating in real-time, collaboratively solving complex tasks.
+              </p>
+            </div>
+            
+            <div className="principle-card p-6">
+              <div className="flex items-center mb-4">
+                <span className="text-purple-400 mr-3 text-2xl">4️⃣</span>
+                <h3 className="text-xl font-semibold">Repairs Itself</h3>
+              </div>
+              <p className="text-white/80">
+                AI diagnosing and fixing itself autonomously, zero downtime.
+              </p>
+            </div>
+          </div>
+          
+          <div className="text-center mt-10">
+            <p className="text-white/80 mb-6">Follow our LinkedIn campaign to discover all 10 principles, with one principle revealed each day starting May 1st!</p>
+            <a href="#subscription" className="inline-block gradient-button py-3 px-8 rounded-full text-white font-medium">
+              Stay Updated
+            </a>
+          </div>
+        </div>
+      </section>
+      
+      {/* Subscription Section */}
+      <section id="subscription" className="py-20 px-6 relative">
+        <div className="max-w-md mx-auto">
+          <div className="form-container p-8">
+            <h2 className="text-2xl font-bold mb-6">Get Notified</h2>
+            
+            <form className="space-y-5">
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-purple-300 mb-1">Email Address *</label>
+                <input 
+                  type="email" 
+                  id="email" 
+                  required 
+                  className="w-full px-4 py-3 rounded-md"
+                  placeholder="your@email.com"
+                />
+              </div>
+              
+              <div>
+                <label htmlFor="name" className="block text-sm font-medium text-purple-300 mb-1">Name (Optional)</label>
+                <input 
+                  type="text" 
+                  id="name" 
+                  className="w-full px-4 py-3 rounded-md"
+                  placeholder="Your Name"
+                />
+              </div>
+              
+              <div>
+                <label htmlFor="phone" className="block text-sm font-medium text-purple-300 mb-1">Phone Number (Optional)</label>
+                <input 
+                  type="tel" 
+                  id="phone" 
+                  className="w-full px-4 py-3 rounded-md"
+                  placeholder="+1 (123) 456-7890"
+                />
+              </div>
+              
+              <button 
+                type="submit" 
+                className="w-full gradient-button text-white font-medium py-3 px-4 rounded-md"
+              >
+                Get Notified
+              </button>
+              
+              <p className="text-xs text-purple-300/70 text-center mt-4">
+                Be the first to know about breakthroughs in Physical AI.<br />
+                Follow our LinkedIn campaign starting May 1st!
+              </p>
+            </form>
+          </div>
+        </div>
+      </section>
+      
+      {/* Footer */}
+      <footer className="pb-16 relative">
+        <div className="max-w-md mx-auto flex justify-center space-x-10 mb-4">
+          <a href="#" target="_blank" rel="noopener noreferrer" className="social-icon" aria-label="LinkedIn Profile">
+            <svg className="w-8 h-8 text-purple-400" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+          </a>
+          
+          <a href="mailto:info@smartbuildlab.ai" className="social-icon" aria-label="Email Us">
+            <svg className="w-8 h-8 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </svg>
+          </a>
+        </div>
+        
+        <div className="text-center">
+          <p className="text-sm text-purple-400/70">
+            #PhysicalAI #SmartBuildLab #MatiAUTOmatic #AI #Robotics #Innovation #WorkersDay
+          </p>
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+export default App;
+
+
+# apps/smartbuildlab-landing/src/main.tsx
+#------------------------------------------------
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App'
+import './styles/index.css'
+
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+)
+
+
+# apps/smartbuildlab-landing/.env
+#------------------------------------------------
+# API Keys for Mailchimp or MailerLite (replace with actual values)
+VITE_MAILCHIMP_API_KEY=your_api_key_here
+VITE_SMARTBUILDLAB_LIST_ID=your_list_id_here
+
+
+# apps/smartbuildlab-landing/index.html
+#------------------------------------------------
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SmartBuildLab.ai - Building the Future with Physical AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <meta name="description" content="SmartBuildLab.ai specializes in revolutionary Physical AI technology, innovating automation and robotics to transform industries." />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
+
+# apps/smartbuildlab-landing/package.json
+#------------------------------------------------
+{
+    "name": "smartbuildlab-landing",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+      "dev": "vite",
+      "build": "tsc && vite build",
+      "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+      "preview": "vite preview"
+    },
+    "dependencies": {
+      "react": "^18.2.0",
+      "react-dom": "^18.2.0"
+    },
+    "devDependencies": {
+      "@types/react": "^18.2.15",
+      "@types/react-dom": "^18.2.7",
+      "@typescript-eslint/eslint-plugin": "^6.0.0",
+      "@typescript-eslint/parser": "^6.0.0",
+      "@vitejs/plugin-react": "^4.0.3",
+      "autoprefixer": "^10.4.14",
+      "eslint": "^8.45.0",
+      "eslint-plugin-react-hooks": "^4.6.0",
+      "eslint-plugin-react-refresh": "^0.4.3",
+      "postcss": "^8.4.27",
+      "tailwindcss": "^3.3.3",
+      "typescript": "^5.0.2",
+      "vite": "^4.4.5"
+    }
+  }
+
+
+# apps/smartbuildlab-landing/postcss.config.js
+#------------------------------------------------
+export default {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {},
+    },
+  }
+
+
+# apps/smartbuildlab-landing/tailwind.config.js
+#------------------------------------------------
+/** @type {import('tailwindcss').Config} */
+export default {
+    content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+    theme: {
+      extend: {
+        colors: {
+          deepPurple: '#160b38',
+          purple: {
+            400: '#c084fc',
+            300: '#d8b4fe',
+            200: '#e9d5ff'
+          },
+          blue: {
+            400: '#60a5fa'
+          },
+          orange: {
+            400: '#fb923c'
+          }
+        },
+        fontFamily: {
+          sans: ['Montserrat', 'sans-serif'],
+        },
+      },
+    },
+    plugins: [],
+  }
+
+
+# apps/smartbuildlab-landing/vite.config.ts
+#------------------------------------------------
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [react()],
+})
+
+
+# package.json
+#------------------------------------------------
+{
+    "name": "mati-monorepo",
+    "version": "1.0.0",
+    "private": true,
+    "workspaces": [
+      "apps/*"
+    ],
+    "scripts": {
+      "build": "turbo run build",
+      "dev": "turbo run dev",
+      "lint": "turbo run lint",
+      "dev:mati": "npm run dev --workspace=matiautomatic-landing",
+      "dev:smart": "npm run dev --workspace=smartbuildlab-landing",
+      "build:mati": "npm run build --workspace=matiautomatic-landing",
+      "build:smart": "npm run build --workspace=smartbuildlab-landing"
+    },
+    "devDependencies": {
+      "turbo": "^1.10.0",
+      "typescript": "^5.0.4"
+    }
+  }
+
+
+# README.md
+#------------------------------------------------
+# MATI_campaing_Landing
+
+
+# tsconfig.json
+#------------------------------------------------
+{
+    "compilerOptions": {
+      "target": "ES2020",
+      "useDefineForClassFields": true,
+      "lib": ["ES2020", "DOM", "DOM.Iterable"],
+      "module": "ESNext",
+      "skipLibCheck": true,
+      "moduleResolution": "bundler",
+      "allowImportingTsExtensions": true,
+      "resolveJsonModule": true,
+      "isolatedModules": true,
+      "noEmit": true,
+      "strict": true,
+      "noUnusedLocals": true,
+      "noUnusedParameters": true,
+      "noFallthroughCasesInSwitch": true,
+      "baseUrl": ".",
+      "paths": {
+        "@/*": ["*"]
+      }
+    }
+  }
+
+
+# turbo.json
+#------------------------------------------------
+{
+    "$schema": "https://turbo.build/schema.json",
+    "pipeline": {
+      "build": {
+        "dependsOn": ["^build"],
+        "outputs": ["dist/**", ".next/**", "!.next/cache/**"]
+      },
+      "lint": {},
+      "dev": {
+        "cache": false,
+        "persistent": true
+      }
+    }
+  }
+
+

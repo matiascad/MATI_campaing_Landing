@@ -25,7 +25,7 @@ set_project_location() {
     if [ -d "${LOCATIONS[$location]}" ]; then
         PROJECT_ROOT="${LOCATIONS[$location]}"
         PROJECT_BASE="${PROJECT_ROOT}"
-        OUTPUT_FILE="${PROJECT_ROOT}/codes_modules.txt"
+        OUTPUT_FILE="${PROJECT_ROOT}/codes_landing.txt"
         echo "✓ Using project root: $PROJECT_ROOT"
         echo "✓ Output will be saved to: $OUTPUT_FILE"
         return 0
@@ -70,24 +70,41 @@ fi
 # Array of files to extract
 files=(
 
-packages/core-types/index.js
-packages/core-types/package.json
-packages/core-types/tsconfig.json
-packages/core-storage/tsconfig.json
-packages/core-storage/index.js
-packages/core-storage/src/index.ts
-packages/core-types/src/index.ts
-packages/core-config/src/index.ts
-packages/core-config/tsconfig.json
-packages/core-config/package.json
-packages/core-config/index.js
-apps/blog-backend/src/index.ts
-apps/blog-backend/package.json
-apps/blog-backend/tsconfig.json
-apps/blog-backend/src/types/index.ts
-apps/blog-backend/src/types/comment.ts
-apps/blog-backend/src/types/site.ts
-
+apps/matiautomatic-landing/src/components/Countdown.tsx
+apps/matiautomatic-landing/src/components/Hero.tsx
+apps/matiautomatic-landing/src/components/MatiLogo.tsx
+apps/matiautomatic-landing/src/components/SocialLinks.tsx
+apps/matiautomatic-landing/src/components/SubscriptionForm.tsx
+apps/matiautomatic-landing/src/styles/index.css
+apps/matiautomatic-landing/src/App.tsx
+apps/matiautomatic-landing/src/main.tsx
+apps/matiautomatic-landing/.env
+apps/matiautomatic-landing/index.html
+apps/matiautomatic-landing/package.json
+apps/matiautomatic-landing/postcss.config.js
+apps/matiautomatic-landing/tailwind.config.js
+apps/matiautomatic-landing/vite.config.ts
+apps/smartbuildlab-landing/node_modules
+apps/smartbuildlab-landing/src/components/Countdown.tsx
+apps/smartbuildlab-landing/src/components/FeaturePrinciples.tsx
+apps/smartbuildlab-landing/src/components/Hero.tsx
+apps/smartbuildlab-landing/src/components/MatiExplanation.tsx
+apps/smartbuildlab-landing/src/components/SmartBuildLogo.tsx
+apps/smartbuildlab-landing/src/components/SocialLinks.tsx
+apps/smartbuildlab-landing/src/components/SubscriptionForm.tsx
+apps/smartbuildlab-landing/src/styles/index.css
+apps/smartbuildlab-landing/src/App.tsx
+apps/smartbuildlab-landing/src/main.tsx
+apps/smartbuildlab-landing/.env
+apps/smartbuildlab-landing/index.html
+apps/smartbuildlab-landing/package.json
+apps/smartbuildlab-landing/postcss.config.js
+apps/smartbuildlab-landing/tailwind.config.js
+apps/smartbuildlab-landing/vite.config.ts
+package.json
+README.md
+tsconfig.json
+turbo.json
 
 )
 
